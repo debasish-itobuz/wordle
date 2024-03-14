@@ -7,6 +7,7 @@ let round = 0;
 let inputCount = 0;
 let currentWord = "";
 
+
 keyBoard.addEventListener("click", (e) => {
     const activeRow = board.children[round];
 
@@ -25,5 +26,9 @@ keyBoard.addEventListener("click", (e) => {
             console.log(data);
         }
     }
-    e.stopPropagation();
+    if (e.target.innerText === 'Enter' && inputCount === 5){
+            console.log(words.includes(currentWord));
+    }
+
+
 });
