@@ -13,8 +13,11 @@ keyBoard.addEventListener("click", (e) => {
     // console.log(board.children[round])
 
     const activeRow = board.children[round];
-    console.log(activeRow);
-    if (e.target.innerText.length() === 1 && round <= 5) {
+    // console.log(activeRow);
+    // console.log(e.target.innerText);
+    // console.log(e.target.innerText.length);
+
+    if (e.target.innerText.length === 1 && round <= 5) {
         activeRow.children[inputCount].innerHTML = e.target.innerText;
         currentWord += e.target.innerText;
 
