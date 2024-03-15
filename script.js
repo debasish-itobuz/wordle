@@ -23,6 +23,7 @@ keyBoard.addEventListener("click", (e) => {
 
   if (!winner && boardText === "Enter" && inputCount === 5) {
     let count = 0;
+
     for (let index = 0; index < 5; index++) {
       const char = playWord.charAt(index).toLowerCase();
       const myChar = currentWord.charAt(index).toLowerCase();
@@ -30,7 +31,8 @@ keyBoard.addEventListener("click", (e) => {
       if (myChar === char) {
         count++;
         activeRow.children[index].style.backgroundColor = "#58a351";
-      } else {
+      } 
+      else {
         if (playWord.includes(myChar)) {
           activeRow.children[index].style.backgroundColor = "#b59f3b";
         } else {
@@ -38,6 +40,7 @@ keyBoard.addEventListener("click", (e) => {
         }
       }
     }
+
     if (count === 5) {
       result.style.visibility = "visible";
       result.innerHTML = "You Win";
