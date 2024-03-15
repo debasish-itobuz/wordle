@@ -1,9 +1,11 @@
 import { words } from "./db.js";
 
+const result = document.querySelector('#result')
 const keyBoard = document.querySelector(".keyboard");
 const board = document.querySelector(".board");
 const random = Math.floor(Math.random() * words.length);
 const playWord = words[random].toLowerCase();
+
 let round = 0;
 let inputCount = 0;
 let currentWord = "";
@@ -43,16 +45,23 @@ keyBoard.addEventListener("click", (e) => {
         if (count === 5) {
             winner = true;
         }
+
+        if(!winner && round === 5 && inputCount === 5){
+            result.style.visibility = "visible";
+            result.innerHTML += playWord;
+            console.log(result.innerHTML)
+        }
+
         inputCount = 0;
         currentWord = "";
         round++;
     }
+    
     if (!winner && e.target.innerText === "Del" && inputCount > 0) {
-        currentWord = currentWord.slice(0, currentWord.length);
+        currentWord = currentWord.slice(0,-1);
+        console.log(currentWord)
         inputCount--;
         activeRow.children[inputCount].innerHTML = ""
-        
-
     }
 
 });
