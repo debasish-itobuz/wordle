@@ -26,7 +26,6 @@ keyBoard.addEventListener("click", (e) => {
     for (let index = 0; index < 5; index++) {
       const char = playWord.charAt(index).toLowerCase();
       const myChar = currentWord.charAt(index).toLowerCase();
-      console.log(activeRow.children[index], char, myChar);
 
       if (myChar === char) {
         count++;
