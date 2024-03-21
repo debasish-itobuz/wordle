@@ -16,12 +16,11 @@ let round = 0;
 let currentWord = "";
 let inputCount = 0;
 let winner = false;
-let count = 0;
-let index;
 let activeRow = board.children[round];
 
 function enterPressed() {
-  for (index = 0; index < 5; index++) {
+  let count = 0
+  for (let index = 0; index < 5; index++) {
     const char = playWord.charAt(index).toLowerCase();
     const myChar = currentWord.charAt(index).toLowerCase();
 
@@ -59,18 +58,18 @@ function enterPressed() {
 
 keyBoard.addEventListener("click", (e) => {
   let boardText = e.target.innerText;
-  
-  if (!winner && boardText.length === 1 && round <= 5 && inputCount < 5) {
+  if (winner) return
+  if (boardText.length === 1 && round <= 5 && inputCount < 5) {
     activeRow.children[inputCount].innerHTML = boardText;
     currentWord += boardText;
     inputCount++;
   }
 
-  if (!winner && boardText === "Enter" && inputCount === 5) {
-    enterPressed(boardText);
+  if ( boardText === "Enter" && inputCount === 5) {
+    enterPressed();
   }
 
-  if (!winner && boardText === "Del" && inputCount > 0) {
+  if (boardText === "Del" && inputCount > 0) {
     currentWord = currentWord.slice(0, -1);
     inputCount--;
     activeRow.children[inputCount].innerHTML = "";
@@ -78,6 +77,7 @@ keyBoard.addEventListener("click", (e) => {
 });
 
 document.addEventListener('keydown', (event) => {
+  if (winner) return
   if (event.key.match(/^[a-zA-Z]$/) && inputCount < 5) {
     let letter = String(event.key).toUpperCase();
     activeRow.children[inputCount].innerHTML = letter
@@ -85,8 +85,14 @@ document.addEventListener('keydown', (event) => {
     inputCount++
   }
 
-  if (event.key.toLowerCase() === 'enter') {
+  if (!winner && event.key.toLowerCase() === 'enter' && inputCount === 5) {
     enterPressed()
+  }
+
+  if (!winner && event.key.toLowerCase() === 'backspace' && inputCount > 0) {
+    currentWord = currentWord.slice(0, -1);
+    inputCount--;
+    activeRow.children[inputCount].innerHTML = "";
   }
 
 });
